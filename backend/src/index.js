@@ -2,13 +2,15 @@ const express = require('express')
 const routes = require('./routes')
 const cors = require('cors')
 
+const { errors } = require('celebrate')
+
 const app = express()
 
 app.use(cors()) //permitindo acesso local enquanto esta em desenvolvimento
 
 app.use(express.json()) //converter json do request body para objeto
 app.use(routes)
-
+app.use(errors())
 
 app.listen(3333)
 
