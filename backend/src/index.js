@@ -12,7 +12,7 @@ app.use(express.json()) //converter json do request body para objeto
 app.use(routes)
 app.use(errors())
 
-app.listen(3333)
+module.exports = app
 
 /**
  * Tipos de parametros
