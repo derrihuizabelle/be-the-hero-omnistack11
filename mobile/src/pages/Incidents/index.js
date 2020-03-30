@@ -74,6 +74,10 @@ export default function Incidents() {
                 showsVerticalScrollIndicator={false}
                 renderItem={({ item: incident }) => (
                     <View style={styles.incident}>
+                        <Text style={styles.incidentProperty, { marginTop: 0, marginBottom: 10 }}>
+                            ONG {incident.name} de {incident.city}/{incident.uf}
+                        </Text>
+
                         <Text style={styles.incidentProperty}>Caso:</Text>
                         <Text style={styles.incidentValue}>{incident.title}</Text>
 
