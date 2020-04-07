@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
+import cogoToast from 'cogo-toast'
+
 import './styles.css'
 import { FiLogIn } from 'react-icons/fi'
 
@@ -25,7 +27,7 @@ export default function Logon() {
             
             history.push('profile')
         } catch (error) {
-            alert('Falha no logon, tente novamente')            
+            cogoToast.error('Falha no logon, tente novamente.')
         }
 
     }

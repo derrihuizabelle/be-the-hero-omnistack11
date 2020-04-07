@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { FiPower, FiTrash2 } from 'react-icons/fi'
 
+import cogoToast from 'cogo-toast'
+
 import './styles.css'
 import logoImg from '../../assets/logo.svg'
 
@@ -11,6 +13,8 @@ export default function Profile () {
     const history = useHistory()
 
     const [incidentsList, setIncidentsList] = useState([])
+
+    const [pageTitle, setPageTitle] = useState('')
 
     const ongName = localStorage.getItem('ongName')
     const ongId = localStorage.getItem('ongId')
@@ -22,8 +26,11 @@ export default function Profile () {
             }
         }).then(response => {
             setIncidentsList(response.data)
+            
+            incidentsList.length > 0 ? setPageTitle('Casos cadastrados') 
+            : setPageTitle('Você ainda não tem casos cadastrados')
         })
-    }, [ongId])
+    }, [incidentsList])
 
     async function HandleDeleteIncident (id) {
         try {
@@ -34,7 +41,7 @@ export default function Profile () {
             })
             setIncidentsList(incidentsList.filter(incident => incident.id !== id))
         } catch (error) {
-            alert('Erro ao deletar caso, tente novamente.')
+            cogoToast.error('Erro ao deletar caso, tente novamente.')
         }
     }
 
@@ -55,7 +62,7 @@ export default function Profile () {
                 </button>
             </header>
 
-            <h1>Casos cadastrados</h1>
+            <h1>{pageTitle}</h1>
 
             <ul>
                 {incidentsList.map(incident => (

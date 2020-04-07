@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-
 import { Link, useHistory } from 'react-router-dom'
+import cogoToast from 'cogo-toast'
 
 import './styles.css'
 
@@ -35,7 +35,7 @@ export default function NewIncident () {
         })
         history.push('/profile')        
     } catch (error) {
-        alert('Erro ao cadastrar caso, tente novamente.')
+        cogoToast.error('Erro ao cadastrar caso, tente novamente.')
     }
 
    }

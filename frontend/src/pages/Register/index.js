@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
+import cogoToast from 'cogo-toast'
+
+
 
 import './styles.css'
 import { FiArrowLeft } from 'react-icons/fi'
@@ -30,10 +33,12 @@ export default function Register () {
         }
         try {
             const response = await api.post('ongs', data)
-            alert(`Seu ID de acesso: ${response.data.id}`)
-            history.push('/')
+            const { hide } = cogoToast.success(`Seu ID de acesso: ${response.data.id}. Clique para voltar.`, {
+                onClick: () => { history.push('/'); hide() },
+                hideAfter: 0
+            })
         } catch (err) {
-            alert('Erro no cadastro, tente novamente.')
+            cogoToast.error('Erro no cadastro, tente novamente.')
         }
        
     }
